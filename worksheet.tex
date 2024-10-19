@@ -1,0 +1,320 @@
+% !TEX spellcheck = en-US
+
+%Basic
+\documentclass[letterpaper, 10pt]{article}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+
+%Font
+\usepackage{tgpagella}
+\usepackage{dashbox}
+%\setlength{\dashlength}{9pt}
+%\setlength{\dashdash}{3pt}
+\setlength{\fboxsep}{2pt}
+\newcounter{NewCounter}
+%\setlength{\fboxrule}{1pt}
+\newcommand{\w}[1]{\stepcounter{NewCounter}\colorbox{lightgray!50}{\textcolor{gray}{{\footnotesize\arabic{NewCounter}}\phantom{XXX}}}}
+%\newcommand{\w}[1]{\stepcounter{NewCounter}\colorbox{lightgray!50}{\textcolor{gray}{{\footnotesize\arabic{NewCounter}}\textcolor{Red}{#1}}}}
+%\usepackage{CJKutf8}
+%\usepackage{polyglossia}
+%\setmainfont{Charis SIL} 
+
+%\usepackage{fontspec}
+%\setmainfont{Gentium Plus}[
+%	BoldFont={Charis SIL Bold},
+%	BoldFeatures={SmallCapsFont=Charis SIL Bold},
+%	BoldItalicFont={Charis SIL Bold Italic},
+%	BoldItalicFeatures={SmallCapsFont=Charis SIL Bold Italic}]
+
+%Graphs/Tables
+\usepackage{graphicx}
+%\def\P{\mathbb{P}}
+%\def\E{\mathbb{E}}
+%\usepackage{caption}
+\usepackage{float}
+%\usepackage{enumitem}
+%\usepackage{tabularx}
+\usepackage{booktabs}
+\newcommand{\citeeg}[1]{\citep[e.g.,][]{#1}}
+
+
+%Citation
+%\usepackage{natbib}
+%\newcommand{\posscitet}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+%\newcommand{\poscitet}[1]{\citeauthor{#1}' (\citeyear{#1})}
+%\newcommand{\possciteauthor}[1]{\citeauthor{#1}'s}
+%\newcommand{\posciteauthor}[1]{\citeauthor{#1}'}
+
+%Color
+%\usepackage{color}
+\usepackage[dvipsnames, x11names]{xcolor}
+
+%Symbol
+\usepackage{amsmath, amsthm, amssymb, latexsym}
+\usepackage{soul}
+
+%Feature-geometry Tree
+%\usepackage{tikz-qtree, qtree, tikz}
+
+%Flowchart
+%\usepackage{tikz}
+%\usetikzlibrary{shapes.geometric, arrows}
+%tikzstyle{process} = [rectangle, minimum width=7.5cm, minimum height=0.25cm, text centered, draw=black]
+%\tikzstyle{noframe} = [rectangle, minimum width=2cm, text centered]
+%\tikzstyle{arrow} = [thick, ->, >=stealth]
+
+%Hyperref
+%\usepackage[hidelinks]{hyperref}
+
+%Margin
+%\usepackage[top=1.25in, bottom=1.25in, left=1.25in, right=1.25in, includeheadfoot]{geometry}
+\usepackage[top=0.5in, bottom=0.5in, left=0.5in, right=0.5in, includeheadfoot]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{Lo / 3 Dec 2019}
+\fancyhead[L]{COLX 535 Syntax crash course}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
+%No indentation
+\setlength\parindent{0pt}
+%\usepackage{bibentry}
+%\nobibliography*
+
+%Syntactic Tree
+\usepackage{qtree}
+\usepackage{tree-dvips}
+\usepackage[bottom]{footmisc}
+%Glossing
+%\usepackage{gb4e}
+%\let\eachwordone=\it
+\usepackage{expex}
+
+%\title{Assignment 1}
+
+\begin{document}
+%\makeatletter
+%\begin{center}
+%	\textbf{\Large\@title}
+%\end{center}
+%\makeatletter
+\section{Syntactic categories}
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Lexical categories}		& \textbf{Penn Treebank POS tags}		& \textbf{Examples}\\
+\midrule
+Noun					&								&\\
+\quad{}singular or mass		& \texttt{NN}						& \textit{apple}, \textit{cheese}\\ 
+\quad{}plural				& \texttt{NNS}						& \textit{bananas}\\
+\quad{}singular proper noun	& \texttt{NNP}						& \textit{Roger}\\
+\quad{}plural proper noun		& \texttt{NNPS}						& \textit{BMWs}\\
+\quad{}personal pronoun			& \texttt{PRP}						& \textit{we}, \textit{him}, \textit{herself}\\
+\quad{}wh-pronoun				& \texttt{WP}						& \textit{what}, \textit{which}, \textit{who}\\
+Verb					&&\\
+\quad{}base form			& \texttt{VB}						& \textit{(to) eat}\\
+\quad{}past tense			& \texttt{VBD}						& \textit{ate}\\
+\quad{}past participle			& \texttt{VBN}						& \textit{eaten}\\
+\quad{}gerund/present pple	& \texttt{VBG}						& \textit{eating}\\
+\quad{}non-3rd ps.\ sg.\ present	& \texttt{VBP}						& \textit{(I) eat}, \textit{(they) eat}\\
+\quad{}3rd ps.\ sg.\ present	& \texttt{VBZ}						& \textit{(she) eats}\\
+Adjective					&&\\
+\quad{}base form			& \texttt{JJ}						& \textit{tasty}, \textit{good}\\
+\quad{}comparative			& \texttt{JJR}						& \textit{tastier}, \textit{better}\\
+\quad{}superative			& \texttt{JJS}						& \textit{tastiest}, \textit{best}\\
+Adverb					&&\\
+\quad{}base form			& \texttt{RB}						& \textit{(to run) fast}\\
+\quad{}comparative			& \texttt{RBR}						& \textit{(to run) faster}\\
+\quad{}superative			& \texttt{RBS}						& \textit{(to run) fastest}\\
+\quad{}wh-adverb				& \texttt{WRB}						& \textit{how}, \textit{when}, \textit{where}, \textit{why}\\
+Preposition				& \texttt{IN}						& \textit{at}, \textit{in}, \textit{of}\\
+\midrule
+\textbf{Functional categories}		& \textbf{Penn Treebank POS tags}		& \textbf{Examples}\\
+\midrule
+Determiner				& \texttt{DT}						& \textit{the}, \textit{a}\\
+\quad{}wh-determiner				& \texttt{WDT}						& \textit{which (fruit)}, \textit{what (flavor)}\\
+Modal					& \texttt{MD}						& \textit{will}, \textit{can}, \textit{could}, \textit{should}\\
+Conjunction				& \texttt{CC}						& \textit{and}, \textit{or}, \textit{but}\\
+Cardinal number			& \texttt{CD}						& \textit{535}, \textit{one (dollar)}\\
+Existential \textit{there}		& \texttt{EX}						& \textit{there (is light)}\\
+Possessive pronoun			& \texttt{PR\$}						& \textit{our}, \textit{his}, \textit{hers}\\
+\quad{}possessive wh-pronoun		& \texttt{WP\$}						& \textit{whose}\\
+\textit{to}					& \texttt{TO}						& \textit{to (eat)}\\
+possessive \textit{'s}			& \texttt{POS}						& \textit{(Roger)'s}\\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{English regular inflection}
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Category}		& \textbf{Inflectional affix}		& \textbf{Examples}\\
+\midrule
+Noun				& plural \textit{-s}/\textit{-es}	& pear\textit{s}, church\textit{es}\\
+					& possessive \textit{-'s}		& Roger\textit{'s}, courses'\\
+Verb					& past tense/past participle \textit{-ed}	& test\textit{ed}\\
+					& present participle (progressive) \textit{-ing}		& cry\textit{ing}\\
+					& 3rd person singular \textit{-s}/\textit{-es}		& work\textit{s}, wash\textit{es}\\
+Adjective/adverb		& comparative \textit{-er}		& tall\textit{er}\\
+					& superlative \textit{-est}		& tall\textit{est}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Phrase structure}
+\begin{itemize}
+\item In linguistics: the X$'$ schema
+\Tree [.XP [.(Specifier) ] [.X\1 [.X Head ] [.(Complement) ] ] ]
+\item In computation linguistics: the X$'$ schema is simplified
+\Tree [.XP [.(Specifier) ] [.X Head ] [.(Complement) ] ]
+\item Only lexical categories can project a phrase (XP)\\\newline
+\Tree [.\w{NP} [.\w{NNP} Roger ] ]
+\Tree [.\w{NP} [.\w{PRP} she ] ]
+\Tree [.\w{WHNP} [.\w{WP} who ] ]
+\Tree [.\w{VP} [.\w{VBD} ate ] ]
+\Tree [.\w{ADJP} [.\w{JJ} tasty ] ]
+\Tree [.\w{ADVP} [.\w{RB} slowly ] ]
+\Tree [.\w{WHADVP} [.\w{WRB} when ] ]
+\Tree [.\w{PP} [.\w{IN} about ] [.\w{NP} [.\w{NNP} Roger ] ] ]
+\Tree [.\w{WHPP} [.\w{IN} on ] [.\w{WHNP} [.\w{WP} what ] ] ]
+	\begin{itemize}
+	\item Complement (has to be another XP): obligatory in some cases, and optional in others (but this can be ambiguous)\\
+	\parbox[t]{.2\textwidth}{\ex
+	\Tree [.VP [.VBP throw ] [.\w{NP} [.DT the ] [.NN ball ] ] !{\qframesubtree} ]
+	\xe}%
+	\parbox[t]{.35\textwidth}{\ex
+	\Tree [.VP [.VBP give ] [.\w{NP} [.DT the ] [.NN ball ] ] !{\qframesubtree} [.\w{PP} [.TO to ] [.NP [.NN someone ] ] ] !{\qframesubtree} ]
+	\xe}%
+	\parbox[t]{.2\textwidth}{\ex
+	\Tree [.ADJP [.JJ full ] [.\w{PP} [.IN of ] [.NP [.NN life ] ] ] !{\qframesubtree} ]
+	\xe}%
+	\parbox[t]{.2\textwidth}{\ex
+	\Tree [.PP [.IN about ] [.NP [.NNP Roger ] ] !{\qframesubtree} ]
+	\xe}
+	\pagebreak
+	\item Modification (always optional):
+		\begin{enumerate}
+		\item Premodifiers: generally are placed inside the phrase they are associated with, with the exception of some VP premodifiers (attached at S-level)\\
+		\parbox[t]{.25\textwidth}{\ex\Tree [.NP [.DT the ] [.\w{JJ} red ] !{\qframesubtree} [.NN ball ] ]\xe}%
+		\parbox[t]{.35\textwidth}{\ex\Tree [.NP [.\w{NP} [.DT a ] [.NN person ] [.POS 's ] ] !{\qframesubtree} [.NN money ] ]\xe}%
+		\parbox[t]{.25\textwidth}{\ex\Tree [.ADJP [.\w{ADVP} [.RB extremely ] ] !{\qframesubtree} [.JJ delicious ] ]\xe}\\
+		\parbox[t]{.25\textwidth}{\ex\Tree [.ADVP [.\w{NP} [.CD one ] [.NN year ] ] !{\qframesubtree} [.RB ago ] ]\xe}%
+		\parbox[t]{.4\textwidth}{\ex\Tree [.S [.NP [.NNP Sandy ] ] [.\w{ADVP} [.RB often ] ] !{\qframesubtree} [.VP [.VBZ throws ] [.NP [.NNS curves ] ] ] ]\xe}
+	\item Postmodifiers\\
+	\parbox[t]{.4\textwidth}{\ex\Tree [.NP [.NP [.DT a ] [.NN teacher ] ] [.\w{PP} [.IN of ] [.NP [.NN chemistry ] ] ] !{\qframesubtree} ]\xe}%
+	\parbox[t]{.25\textwidth}{\ex\Tree [.ADJP [.ADJP [.JJR taller ] ] [.\w{PP} [.IN than ] [.NP [.PRP him ] ] ] !{\qframesubtree} ]\xe}\\
+	\parbox[t]{.5\textwidth}{\ex\Tree [.VP [.VBG reading ] [.\w{PP} [.IN about ] [.NP [.NNS toads ] ] ] !{\qframesubtree} [.\w{PP} [.IN on ] [.NP [.DT the ] [.NN internet ] ] ] !{\qframesubtree} ]\xe}
+	\end{enumerate}
+	\end{itemize}
+\end{itemize}
+\section{Clause types}
+\subsection{S}
+\begin{itemize}
+\item Simple declarative sentences\footnote{Notational simplification: \Tree [.VP [.VBD threw ] [.NP [.DT the ] [.NN ball ] ] ] $=$ \Tree [.VP [.VBD threw ] \qroof{the ball}.NP ]}\\
+\parbox[t]{.3\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD threw ] \qroof{the ball}.NP ] ]\xe}%
+\parbox[t]{.3\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.\w{VP} [.\w{MD} will ] !{\qframesubtree} [.VP [.\w{VB} throw ] \qroof{the ball}.NP ] ] ]\xe}%
+\parbox[t]{.3\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.\w{VP} [.\w{VBZ} has ] !{\qframesubtree} [.VP [.\w{VBN} thrown ] \qroof{the ball}.NP ] ] ]\xe}\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.\w{VP} [.\w{MD} should ] !{\qframesubtree} [.\w{VP} [.\w{VB} have ] !{\qframesubtree} [.VP [.\w{VBN} thrown ] \qroof{the ball}.NP ] ] ] ]\xe}%
+\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.\w{VP} [.\w{VBD} did ] [.\w{RB} not ] !{\qframesubtree} [.VP [.\w{VB} throw ] \qroof{the ball}.NP ] ] ]\xe}\\
+\ex[exno = \textbf{Your turn}]A friend of mine has been studying computer science\xe
+%\scalebox{0.95}{\Tree [.S [.NP \qroof{A friend}.NP \qroof{of mine}.PP ] [.VP [.VBZ has ] [.VP [.VBN been ] [.VP [.VBG studying ] \qroof{computer science}.NP ] ] ] ]}\xe
+\pagebreak
+
+\item Imperatives\\
+\parbox[t]{.35\textwidth}{\ex\Tree [.S [.\w{NP} [.{\w{-NONE-}} * ] ] !{\qframesubtree} [.VP [.\w{VB} Throw ] \qroof{the ball}.NP ] [.{.} {!} ] ]\xe}%
+\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{John}.NP [.{,} {,} ] \qroof{*}.\w{NP} !{\qframesubtree} [.VP [.\w{VB} go ] [.ADVP [.RB home ] ] ] [.{.} {!} ] ]\xe}
+\ex[exno = \textbf{Your turn}]Don't put the book on the table!\xe\vspace{20em}
+%\scalebox{1}{\Tree [.S \qroof{*}.NP [.VP [.VB Do ] [.RB n't ] [.VP [.VB put ] \qroof{book}.NP \qroof{on the table}.PP ] ] [.{.} {!} ] ]}
+\item Passives: \textit{Roger threw the ball} $\rightarrow$ \textit{The ball was thrown (by Roger)}.\\
+\parbox[t]{.4\textwidth}{\ex{}Deep structure\\\Tree [.S \qroof{$\varnothing$}.NP [.VP [.VBD was ] [.VP [.VBN thrown ] \qroof{the ball}.NP ] ] ]\xe}%
+\parbox[t]{.4\textwidth}{\ex{}Surface structure\\\Tree [.S \qroof{\node{e}The ball}.NP-1 !{\qframesubtree} [.VP [.VBD was ] [.VP [.VBN thrown ] [.NP [.{-NONE-} \node{s}*-1 ] ] !{\qframesubtree} ] ] ]{\makedash{4pt}\anodecurve[bl]{s}[bl]{e}{0.75in}}\xe}\\
+\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{\node{e}The ball}.NP-1 [.VP [.VBD was ] [.VP [.VBN thrown ] [.NP [.{-NONE-} \node{s}*-1 ] ] [.\w{PP} [.IN by ] \qroof{Roger}.NP ] !{\qframesubtree} ] ] ]\makedash{4pt}\anodecurve[bl]{s}[bl]{e}{0.75in}\xe}
+\ex[exno = \textbf{Your turn}]The book was given to me by a friend\xe\vspace{15em}
+%\Tree [.S \qroof{The book}.NP-1 [.VP [.VBD was ] [.VP [.VBN given ] \qroof{*-1}.NP \qroof{to me}.PP \qroof{by a friend}.PP ] ] ]
+\item Infinitives\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBZ wants ] [.\w{S} \qroof{Mary}.NP [.\w{VP} [.TO to ] \qroof{throw the ball}.VP ] ] !{\qframesubtree} ] ]\xe}%
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{\node{e}Roger}.NP-1 [.VP [.VBZ wants ] [.\w{S} [.NP [.{-NONE-} \node{s}*-1 ] ] [.\w{VP} [.TO to ] \qroof{throw the ball}.VP ] ] !{\qframesubtree} ] ]\makedash{4pt}{\anodecurve[bl]{s}[bl]{e}{0.75in}}\xe}
+\pagebreak
+\ex[exno = \textbf{Your turn}]You cannot expect him to come here\xe\vspace{15em}
+%\scalebox{0.6}{\Tree [.S \qroof{You}.NP [.VP [.MD can ] [.RB not ] [.VP [.VB expect ] [.S \qroof{him}.NP [.VP [.TO to ] [.VP [.VB come ] [.ADVP [.RB here ] ] ] ] ] ] ] ]}
+\end{itemize}
+\subsection{SQ}
+\begin{itemize}
+\item Yes/No questions
+\begin{itemize}
+	\item \textit{Roger is$_i$ smart.} $\rightarrow$ \textit{Is$_i$ Roger $t_i$ smart?} (this is called the \textit{head-movement}, but we don't mark it in the Treebank parse)\\
+	\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBZ is ] !{\qframesubtree} \qroof{smart}.ADJP ] ]\xe}%
+	\parbox[t]{.4\textwidth}{\ex\Tree [.\w{SQ} [.VBZ Is ] !{\qframesubtree} \qroof{Roger}.NP \qroof{smart}.ADJP [.{.} ? ] ]\xe}
+	\item \textit{Roger will$_i$ throw the ball.} $\rightarrow$ \textit{Will$_i$ Roger t$_i$ throw the ball?}\\
+	\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.MD will ] !{\qframesubtree} \qroof{throw the ball}.VP ] ]\xe}%
+	\parbox[t]{.4\textwidth}{\ex\Tree [.\w{SQ} [.MD Will ] !{\qframesubtree} \qroof{Roger}.NP \qroof{throw the ball}.VP [.{.} ? ] ]\xe}
+	\item \textit{Roger threw the ball.} $\rightarrow$ \textit{Roger did$_i$ throw the ball.} (this step is called \textit{do-support}) $\rightarrow$ \textit{Did$_i$ Roger t$_i$ throw the ball?}\\
+	\parbox[t]{.4\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD did ] !{\qframesubtree} \qroof{throw the ball}.VP ] ]\xe}%
+	\parbox[t]{.4\textwidth}{\ex\Tree [.\w{SQ} [.VBD Did ] !{\qframesubtree} \qroof{Roger}.NP \qroof{throw the ball}.VP [.{.} ? ] ]\xe}
+	%\item \begin{CJK*}{UTF8}{bsmi}羅傑丟了球。$\rightarrow$ 羅傑丟了球\underline{嗎}？\end{CJK*}
+	%\item \begin{CJK*}{UTF8}{min}ロジャーはボールを投げました。$\rightarrow$ ロジャーはボールを投げました\underline{か}。\end{CJK*}
+\ex[exno = \textbf{Your turn}]Was the course taught by the same person?\xe\vspace{10em}
+%\scalebox{0.75}{\Tree [.SQ [.VBD Was ] \qroof{the course}.NP-1 [.VP [.VBN taught ] \qroof{*-1}.NP \qroof{by the same person}.PP ] [.{.} ? ] ]}
+	\end{itemize}
+
+\end{itemize}
+\subsection{SBARQ}
+\begin{itemize}
+\item Wh-questions (contain a gap and require a trace)
+	\begin{itemize}
+	\item \textit{Roger threw the ball.} $\rightarrow$ \textit{Who$_i$ threw the ball.} $\rightarrow$ \textit{Who$_i$ $t_i$ threw the ball?} (this is called \textit{wh-movement}, and we mark it here)\\
+	\parbox[t]{.4\textwidth}{\ex\Tree [.S [.NP [.NNP Roger ] ] !{\qframesubtree} \qroof{threw the ball}.VP ]\xe}%
+	\parbox[t]{.4\textwidth}{\ex\Tree [.\w{SBARQ} [.\w{WHNP-1} [.WP \node{e}Who ] ] !{\qframesubtree} [.\w{SQ} [.NP [.{-NONE-} \node{s}{\w{*T*-1}} ] ] !{\qframesubtree} \qroof{threw the ball}.VP ] [.{.} ? ] ]\anodecurve[bl]{s}[bl]{e}{0.5in}\xe}
+	\item \textit{Roger threw the ball.} $\rightarrow$ \textit{Roger did throw the ball} $\rightarrow$ \textit{Roger did$_i$ throw what$_j$?} $\rightarrow$ \textit{What$_j$ did$_i$ Roger $t_i$ throw $t_j$?}\\
+	\parbox[t]{.35\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD did ] [.VP [.VB throw ] [.NP [.DT the ] [.NN ball ] ] !{\qframesubtree} ] ] ]\xe}%
+	\parbox[t]{.4\textwidth}{\ex\Tree [.\w{SBARQ} [.\w{WHNP-1} [.WP \node{e}What ] ] !{\qframesubtree} [.\w{SQ} [.VBD did ] \qroof{Roger}.NP [.VP [.VB throw ] [.NP [.{-NONE-} \node{s}{\w{*T*-1}} ] ] !{\qframesubtree} ] ] [.{.} ? ] ]\anodecurve[bl]{s}[bl]{e}{0.75in}\xe}
+	\item \scalebox{0.95}{\textit{Roger met them there.} $\rightarrow$ \textit{Roger did meet them there.} $\rightarrow$ \textit{Roger did$_i$ meet them where$_j$?} $\rightarrow$ \textit{Where$_j$ did$_i$ Roger $t_i$ meet them $t_j$?}}\\
+	\parbox[t]{.35\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD did ] [.VP [.VB meet ] \qroof{them}.NP [.ADVP [.RB there ] ] !{\qframesubtree} ] ] ]\xe}\\
+	\parbox[t]{.6\textwidth}{\ex\scalebox{0.9}{\Tree [.\w{SBARQ} [.\w{WHADVP-1} [.WRB \node{e}Where ] ] !{\qframesubtree} [.\w{SQ} [.VBD did ] \qroof{Roger}.NP [.VP [.VB meet ] \qroof{them}.NP [.ADVP [.{-NONE-} \node{s}{\w{*T*-1}} ] ] !{\qframesubtree} ] ] [.{.} ? ] ]\anodecurve[bl]{s}[bl]{e}{0.75in}}\xe}\\
+	\item \textit{It is three.} $\rightarrow$ \textit{It is$_i$ [what time]$_j$.} $\rightarrow$ \textit{[What time]$_j$ is$_i$ it $t_i$ $t_j$?}\\
+	\parbox[t]{.3\textwidth}{\ex\Tree [.S [.NP [.PRP It ] ] [.VP [.VBZ is ] [.NP [.NN three ] ] !{\qframesubtree} ] ]\xe}%
+	\parbox[t]{.35\textwidth}{\ex\Tree [.\w{SBARQ} [.\w{WHNP-1} [.\w{WDT} \node{e}what ] [.NN time ] ] !{\qframesubtree} [.\w{SQ} [.VBZ is ] \qroof{it}.NP [.NP [.{-NONE-} \node{s}{\w{*T*-1}} ] ] !{\qframesubtree} ] [.{.} ? ] ]\anodecurve[bl]{s}[bl]{e}{0.75in}\xe}
+	\ex[exno = \textbf{Your turn}]On what did you sit?\xe\vspace{15em}
+	%\Tree [.SBARQ [.WHPP [.IN On ] [.WHNP [.WP what ] ] ] [.SQ [.VBD did ] \qroof{you}.NP [.VP [.VB sit ] \qroof{*T*-1}.PP ] ] [.{.} {?} ] ]
+	%\item \begin{CJK*}{UTF8}{bsmi}羅傑丟了球。$\rightarrow$ 誰丟了球？\end{CJK*}
+	%\item \begin{CJK*}{UTF8}{bsmi}羅傑丟了球。$\rightarrow$ 羅傑丟了什麼$_i$？ $\rightarrow$ *什麼$_i$羅傑丟了$t_i$？\end{CJK*}
+	%\item \begin{CJK*}{UTF8}{min}ロジャーはボールを投げました。$\rightarrow$ だれがボールを投げましたか。\end{CJK*}
+	%\item \begin{CJK*}{UTF8}{min}ロジャーはボールを投げました。$\rightarrow$ ロジャーはなにを$_i$投げました。$\rightarrow$ ?なにを$_i$ロジャーは$t_i$投げましたか。\end{CJK*}
+	\end{itemize}
+\end{itemize}
+\subsection{SBAR}
+\begin{itemize}
+\item Subordinate clauses\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD knew ] [.\w{SBAR} [.\w{IN} that ] \qroof{Mary threw the ball}.S ] !{\qframesubtree} ] ]\xe}
+\parbox[t]{.5\textwidth}{\ex[exno = \textbf{Your turn}]He is curious whether she knew him\xe}
+%\scalebox{0.9}{\Tree [.S \qroof{He}.NP [.VP [.VBZ is ] [.ADJP [.JJ curious ] [.SBAR [.IN whether ] \qroof{she knew him}.S ] ] ] ]}\xe}
+\item Relative clauses\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.\w{NP} \qroof{the person}.NP [.\w{SBAR} [.WHNP-1 [.WP \node{e}who ] ] [.\w{S} [.NP [.{-NONE-} \node{s}*T*-1 ] ] \qroof{threw the ball}.VP ] ] !{\qframesubtree} ]\anodecurve[bl]{s}[bl]{e}{0.5in}\xe}%
+\parbox[t]{.5\textwidth}{\ex\Tree [.\w{NP} \qroof{the friend}.NP [.\w{SBAR} [.WHNP-1 [.WP \node{e}who(m) ] ] [.\w{S} \qroof{Roger}.NP [.VP [.VBD visited ] [.NP [.{-NONE-} \node{s}*T*-1 ] ] ] ] ] !{\qframesubtree} ]\anodecurve[bl]{s}[bl]{e}{0.75in}\xe}
+\ex[exno = \textbf{Your turn}]The friend who I bought flowers for is sweet\xe\vspace{30em}
+%\Tree [.S [.NP \qroof{The friend}.NP [.SBAR [.WHNP-1 [.WP \node{e}who ] ] [.S \qroof{I}.NP [.VP [.VBD bought ] \qroof{flowers}.NP [.PP [.IN for ] [.NP [.{-NONE-} \node{s}*T*-1 ] ] ] ] ] ] ] [.VP [.VBZ is ] \qroof{sweet}.ADJP ] ]\anodecurve[bl]{s}[bl]{e}{0.75in}
+\item Indirect questions\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD asked ] [.\w{SBAR} [.WHNP-1 [.WP \node{e}who ] ] [.\w{S} [.NP [.{-NONE-} \node{s}*T*-1 ] ] \qroof{threw the ball}.VP ] ] !{\qframesubtree} ] ]\anodecurve[bl]{s}[bl]{e}{0.5in}\xe}%
+\parbox[t]{.5\textwidth}{\ex[exno = \textbf{Your turn}]I know what you're talking about\xe}
+%\scalebox{0.7}{\Tree [.S \qroof{I}.NP [.VP [.VBP know ] [.SBAR [.WHNP-1 [.WP \node{e}what ] ] [.S \qroof{you}.NP [.VP [.VBP 're ] [.VP [.VBG talking ] [.PP [.IN about ] [.NP [.{-NONE-} \node{s}*T*-1 ] ] ] ] ] ] ] ] ]\anodecurve[bl]{s}[bl]{e}{0.5in}}
+%\xe}
+\end{itemize}
+\section{Coordination}
+\begin{itemize}
+\item Phrase coordination\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S [.\w{NP} [.NP [.DT these ] [.NNS girls ] ] !{\qframesubtree} [.\w{CC} and ] [.NP [.DT those ] [.NNS boys ] ] !{\qframesubtree} ] [.\w{VP} [.VP [.VBP throw ] \qroof{well}.ADVP ] !{\qframesubtree} [.\w{CC} and ] [.VP [.VBP catch ] \qroof{badly}.ADVP ] !{\qframesubtree} ] ]\xe}%
+\item Clause coordination\\
+\parbox[t]{.5\textwidth}{\ex\Tree [.S \qroof{Roger}.NP [.VP [.VBD knew ] [.\w{SBAR} [.SBAR \qroof{\node{e1}who}.WHNP-1 [.S \qroof{\node{s1}*T*-1}.NP \qroof{threw the ball}.VP ] ] !{\qframesubtree} [.\w{CC} and ] [.SBAR \qroof{\node{e2}who}.WHNP-2 [.S \qroof{\node{s2}*T*-2}.NP \qroof{caught it}.VP ] ] !{\qframesubtree} ] ] ]\anodecurve[bl]{s1}[bl]{e1}{0.4in}\anodecurve[bl]{s2}[bl]{e2}{0.4in}\xe}
+\end{itemize}
+\vspace{-1.5em}
+\section{Combining everything}
+\ex[exno = \textbf{Your turn}]Students have not been informed by the authority of the news that the strike which the company called was canceled and banned\xe
+%\scalebox{0.4}{\Tree [.S \qroof{Students}.NP-1 [.VP [.VBP have ] [.RB not ] [.VP [.VBN been ] [.VP [.VBN informed ] \qroof{*T*-1}.NP \qroof{by the authority}.PP [.PP [.IN of ] [.NP [.DT the ] [.NN news ] [.SBAR [.IN that ] [.S [.NP-3 \qroof{the strike}.NP [.SBAR \qroof{which}.WHNP-2 [.S \qroof{the company}.NP [.VP [.VBD called ] \qroof{*T*-2}.NP ] ] ] ] [.VP [.VBD was ] [.VP \qroof{canceled and banned}.VBN \qroof{*T*-3}.NP ] ] ] ] ] ] ] ] ] ]}
+%\bibliographystyle{linquiry2}
+%\bibliography{bib.bib}
+\end{document}
